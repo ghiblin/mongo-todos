@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "nx serve",
+    "start": "node dist/apps/api/main.js",
     "build": "nx run-many --target=build --projects=todos,api --parallel=true",
     "test": "nx test"
   },
