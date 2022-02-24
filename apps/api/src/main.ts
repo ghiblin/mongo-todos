@@ -17,8 +17,8 @@ app.get('*', (request, response) => {
   response.sendFile(path.join(CLIENT_BUILD_PATH, 'index.html'));
 });
 
-const port = process.env.port || 3333;
-const server = app.listen(port, () => {
-  console.log('Listening at http://localhost:' + port + '/api');
+const PORT = process.env.PORT || 3333;
+const server = app.listen(PORT, () => {
+  console.log('Listening at http://localhost:' + PORT + '/api');
 });
 server.on('error', console.error);
