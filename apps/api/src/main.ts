@@ -1,6 +1,7 @@
 import * as express from 'express';
 import * as path from 'path';
 import { Message } from '@mongo-todos/api-interfaces';
+import { addTodosRoutes } from './app/todos';
 
 const CLIENT_BUILD_PATH = path.join(__dirname, '../todos');
 
@@ -12,6 +13,7 @@ const greeting: Message = { message: 'Welcome to api!' };
 app.get('/api', (req, res) => {
   res.send(greeting);
 });
+addTodosRoutes(app);
 
 app.get('*', (request, response) => {
   response.sendFile(path.join(CLIENT_BUILD_PATH, 'index.html'));

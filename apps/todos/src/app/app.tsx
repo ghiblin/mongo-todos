@@ -1,27 +1,33 @@
-import React, { useEffect, useState } from 'react';
-import { Message } from '@mongo-todos/api-interfaces';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../reducer';
+import { fetchTodosRequest } from '../features/todos/actions';
 
 export const App = () => {
-  const [m, setMessage] = useState<Message>({ message: '' });
+  const dispatch = useDispatch();
+  const { fetching, todos, error } = useSelector(
+    (state: RootState) => state.todos
+  );
 
   useEffect(() => {
-    fetch('/api')
-      .then((r) => r.json())
-      .then(setMessage);
+    dispatch(fetchTodosRequest());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  if (fetching) {
+    return <div>Loading...</div>;
+  }
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
   return (
-    <>
-      <div style={{ textAlign: 'center' }}>
-        <h1>Welcome to todos!</h1>
-        <img
-          width="450"
-          src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png"
-          alt="Nx - Smart, Fast and Extensible Build System"
-        />
-      </div>
-      <div>{m.message}</div>
-    </>
+    <div>
+      {todos.map((todo) => (
+        <div key={todo.id}>
+          {todo.title} - completed? {todo.isCompleted}
+        </div>
+      ))}
+    </div>
   );
 };
 
