@@ -33,6 +33,41 @@ export default (state = initialState, action: TodosActions): TodosState => {
         error: action.payload.error,
       };
 
+    case types.ADD_NEW_TODO:
+      return {
+        ...state,
+        todos: [
+          ...state.todos,
+          // temporary id, to change when server respond with updated list
+          { id: 'new-todo', title: action.payload.title, isCompleted: false },
+        ],
+      };
+
+    case types.TOGGLE_TODO: {
+      const idx = state.todos.findIndex(
+        (todo) => todo.id === action.payload.id
+      );
+      return idx > -1
+        ? {
+            ...state,
+            todos: [
+              ...state.todos.slice(0, idx),
+              {
+                ...state.todos[idx],
+                isCompleted: !state.todos[idx].isCompleted,
+              },
+              ...state.todos.slice(idx + 1),
+            ],
+          }
+        : state;
+    }
+
+    case types.DELETE_TODO:
+      return {
+        ...state,
+        todos: state.todos.filter((todo) => todo.id !== action.payload.id),
+      };
+
     default:
       return state;
   }

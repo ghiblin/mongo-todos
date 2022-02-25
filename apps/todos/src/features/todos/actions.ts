@@ -1,9 +1,15 @@
 import types, {
+  AddNewTodo,
+  AddNewTodoPayload,
+  DeleteTodo,
+  DeleteTodoPayload,
   FetchTodosFailure,
   FetchTodosFailurePayload,
   FetchTodosRequest,
   FetchTodosSuccess,
   FetchTodosSuccessPayload,
+  ToggleTodo,
+  ToggleTodoPayload,
 } from './types';
 
 export const fetchTodosRequest = (): FetchTodosRequest => ({
@@ -21,5 +27,20 @@ export const fetchTodosFailure = (
   payload: FetchTodosFailurePayload
 ): FetchTodosFailure => ({
   type: types.FETCH_TODOS_FAILURE,
+  payload,
+});
+
+export const addNewTodo = (payload: AddNewTodoPayload): AddNewTodo => ({
+  type: types.ADD_NEW_TODO,
+  payload,
+});
+
+export const toggleTodo = (payload: ToggleTodoPayload): ToggleTodo => ({
+  type: types.TOGGLE_TODO,
+  payload,
+});
+
+export const deleteTodo = (payload: DeleteTodoPayload): DeleteTodo => ({
+  type: types.DELETE_TODO,
   payload,
 });
