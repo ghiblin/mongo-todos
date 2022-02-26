@@ -1,5 +1,7 @@
 import types, {
   AddNewTodo,
+  AddNewTodoAsync,
+  AddNewTodoAsyncPayload,
   AddNewTodoPayload,
   DeleteTodo,
   DeleteTodoPayload,
@@ -29,6 +31,11 @@ export const fetchTodosFailure = (
   type: types.FETCH_TODOS_FAILURE,
   payload,
 });
+
+export const addNewTodoAsync = (payload: AddNewTodoAsyncPayload): AddNewTodoAsync => ({
+  type: types.ADD_NEW_TODO_ASYNC,
+  payload,
+})
 
 export const addNewTodo = (payload: AddNewTodoPayload): AddNewTodo => ({
   type: types.ADD_NEW_TODO,

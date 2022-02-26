@@ -5,8 +5,8 @@ import TodoItem from './todo-item';
 export type TodoListProps = {
   todos: Todo[];
   addNewTodo: (title: string) => void;
-  toggleTodo: (id: Todo['id']) => void;
-  deleteTodo: (id: Todo['id']) => void;
+  toggleTodo: (id: Todo['_id']) => void;
+  deleteTodo: (id: Todo['_id']) => void;
 };
 
 export default function TodoList({
@@ -25,10 +25,10 @@ export default function TodoList({
         <ul className="todo-list">
           {todos.map((todo) => (
             <TodoItem
-              key={todo.id}
+              key={todo._id}
               todo={todo}
-              onToggle={() => toggleTodo(todo.id)}
-              onDelete={() => deleteTodo(todo.id)}
+              onToggle={() => toggleTodo(todo._id)}
+              onDelete={() => deleteTodo(todo._id)}
             />
           ))}
         </ul>

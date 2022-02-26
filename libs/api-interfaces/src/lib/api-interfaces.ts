@@ -1,9 +1,5 @@
-export interface Message {
-  message: string;
-}
-
 export interface Todo {
-  id: string;
+  _id: string;
   title: string;
   isCompleted: boolean;
 }

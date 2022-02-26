@@ -36,16 +36,12 @@ export default (state = initialState, action: TodosActions): TodosState => {
     case types.ADD_NEW_TODO:
       return {
         ...state,
-        todos: [
-          ...state.todos,
-          // temporary id, to change when server respond with updated list
-          { id: 'new-todo', title: action.payload.title, isCompleted: false },
-        ],
+        todos: [...state.todos, action.payload],
       };
 
     case types.TOGGLE_TODO: {
       const idx = state.todos.findIndex(
-        (todo) => todo.id === action.payload.id
+        (todo) => todo._id === action.payload.id
       );
       return idx > -1
         ? {
@@ -65,7 +61,7 @@ export default (state = initialState, action: TodosActions): TodosState => {
     case types.DELETE_TODO:
       return {
         ...state,
-        todos: state.todos.filter((todo) => todo.id !== action.payload.id),
+        todos: state.todos.filter((todo) => todo._id !== action.payload.id),
       };
 
     default:

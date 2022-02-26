@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../reducer';
 import {
-  addNewTodo,
+  addNewTodoAsync,
   deleteTodo,
   fetchTodosRequest,
   toggleTodo,
@@ -16,9 +16,10 @@ export const App = () => {
     (state: RootState) => state.todos
   );
 
-  const dispatchAddNewTodo = (title: string) => dispatch(addNewTodo({ title }));
-  const dispatchToggleTodo = (id: Todo['id']) => dispatch(toggleTodo({ id }));
-  const dispatchDeleteTodo = (id: Todo['id']) => dispatch(deleteTodo({ id }));
+  const dispatchAddNewTodo = (title: string) =>
+    dispatch(addNewTodoAsync({ title }));
+  const dispatchToggleTodo = (id: Todo['_id']) => dispatch(toggleTodo({ id }));
+  const dispatchDeleteTodo = (id: Todo['_id']) => dispatch(deleteTodo({ id }));
 
   useEffect(() => {
     dispatch(fetchTodosRequest());
